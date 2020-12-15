@@ -1,1 +1,2 @@
-# Grupo-Carona
+# Aplicativo de carona desenvolvido em Ionic para alunos do IFSP Guarulhos
+## Desenvolvido e projetado pelos alunos: **Bárbara Nery Araújo, Bruno da Silva Barros, Guilherme Costa Tavares e Lucas Passos da Silva**
