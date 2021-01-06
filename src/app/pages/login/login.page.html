@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div id="logo_div">
+    <ion-text color="medium">
+      <img src="../../../assets/icon/logo.png" height="130">
+      <h3>App Carona</h3>
+    </ion-text>
+  </div>
+
+  <ion-item>
+    <ion-icon slot="start" name="mail"></ion-icon>
+    <ion-input type="email" placeholder="Email" autofocus="true" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon slot="start" name="lock-closed"></ion-icon>
+    <ion-input type="password" placeholder="Senha"></ion-input>
+  </ion-item>
+  
+  <br/><br/>
+
+  <ion-button (click)="onClick()" expand="block" shape="round" size="default">
+    Enviar
+  </ion-button>
 
 </ion-content>
+
+
+
