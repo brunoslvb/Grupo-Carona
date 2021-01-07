@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { LoadingController, NavController } from '@ionic/angular';
 import Firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 
@@ -10,8 +11,12 @@ export class UserService {
 
   isLoggedIn: Observable<Firebase.User>;
 
+  loading: any;
+
   constructor(
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private loadingController: LoadingController,
+    private nav: NavController
   ) {
     this.isLoggedIn = this.auth.authState;
   }
@@ -26,6 +31,29 @@ export class UserService {
   
   forgotPassword(id) {
     return this.auth.sendPasswordResetEmail(id);
+  }
+
+  logout(){
+    return this.auth.signOut();
+  }
+
+  async isUserLoggedIn(){
+
+    this.loading = await this.loadingController.create({ spinner: 'crescent' });
+    
+    await this.loading.present();
+
+    try {
+      await this.isLoggedIn.subscribe(user => {
+        if(user){
+          this.nav.navigateForward('home');
+        }
+      });      
+    } catch (err) {
+      console.error(err);
+    }
+
+    await this.loading.dismiss();
   }
 
 }

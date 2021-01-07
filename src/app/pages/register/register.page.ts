@@ -22,6 +22,9 @@ export class RegisterPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.userService.isUserLoggedIn();
+
     this.registerForm = this.builder.group({
       prontuario: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       name: ['', Validators.required],

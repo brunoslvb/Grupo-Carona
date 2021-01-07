@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content class="ion-padding">
   <div id="logo_div">
     <ion-text color="medium">
       <img src="../../../assets/icon/logo.png" height="130">
@@ -6,21 +6,23 @@
     </ion-text>
   </div>
 
-  <ion-item>
-    <ion-icon slot="start" name="mail"></ion-icon>
-    <ion-input type="email" placeholder="Email" autofocus="true" ></ion-input>
-  </ion-item>
+  <form [formGroup]="loginForm" (submit)="login()">
+    <ion-item>
+      <ion-icon slot="start" name="mail"></ion-icon>
+      <ion-input type="email" formControlName="email" placeholder="Email" autofocus="true" ></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-icon slot="start" name="lock-closed"></ion-icon>
-    <ion-input type="password" placeholder="Senha"></ion-input>
-  </ion-item>
-  
-  <br/><br/>
+    <ion-item>
+      <ion-icon slot="start" name="lock-closed"></ion-icon>
+      <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+    </ion-item>
+    
+    <br/><br/>
 
-  <ion-button (click)="onClick()" expand="block" shape="round" size="default">
-    Enviar
-  </ion-button>
+    <ion-button type="submit" [disabled]="this.loginForm.invalid" expand="block" shape="round" size="default">
+      Enviar
+    </ion-button>
+  </form>
 
 </ion-content>
 
