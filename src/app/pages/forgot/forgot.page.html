@@ -1,0 +1,37 @@
+<ion-header translucent>
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" size="large" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Esqueci Minha Senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div id="logo_div">
+    <ion-text color="medium">
+      <img src="../../../assets/icon/logo.png" height="130">
+      <h3>App Carona</h3>
+    </ion-text>
+  </div>
+
+  <form [formGroup]="forgotForm" (submit)="forgotPassword()">
+    <ion-item>
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
+      <ion-input type="email" formControlName="email" placeholder="Email" autofocus="true" ></ion-input>
+      <ion-input type="text" id="domain" value="@aluno.ifsp.edu.br" readonly></ion-input>
+    </ion-item>
+
+    <br/><br/>
+    
+    <ion-button type="submit" [disabled]="this.forgotForm.invalid" expand="block" shape="round" size="default">
+      Enviar
+    </ion-button>
+  </form>
+
+
+
+
+</ion-content>
