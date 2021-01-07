@@ -1,0 +1,18 @@
+#logo_div {
+  margin: 10px;
+  height: 20%;
+  display: flex;
+  align-items: center; // alinhamento vertical
+  justify-content: center; // horizontal
+
+  img {
+    height: 150px;
+  }
+}
+
+h3{
+  color: gray;
+  text-align: center;
+  margin: 10px 10px 20px 10px;
+  padding: 0;
+}
