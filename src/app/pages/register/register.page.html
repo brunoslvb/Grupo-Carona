@@ -1,0 +1,56 @@
+<ion-header translucent>
+  <ion-toolbar class="ion-no-border">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" size="large" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h3 class="ion-padding">App Carona</h3>
+
+  <form [formGroup]="registerForm" (submit)="createUser()">
+    <ion-item>
+      <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+      <ion-input type="text" formControlName="prontuario" placeholder="Prontuário" autofocus="true" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="person-outline"></ion-icon>
+      <ion-input type="text" formControlName="name" placeholder="Nome" ></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon slot="start" name="mail-outline"></ion-icon>
+      <ion-input type="email" formControlName="email" placeholder="E-mail" ></ion-input>
+      <ion-input type="text" id="domain" value="@aluno.ifsp.edu.br" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="call-outline"></ion-icon>
+      <ion-input type="number" formControlName="phone" placeholder="Número de telefone" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="calendar-outline"></ion-icon>
+      <ion-input type="date" formControlName="birthday" placeholder="Data de Nascimento" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+      <ion-input type="password" formControlName="password" placeholder="Senha"></ion-input>
+    </ion-item>
+    
+    <br/><br/>
+
+    <ion-button type="submit" [disabled]="this.registerForm.invalid" expand="block" shape="round" size="default">
+      Enviar
+    </ion-button>
+
+  </form>
+
+</ion-content>
