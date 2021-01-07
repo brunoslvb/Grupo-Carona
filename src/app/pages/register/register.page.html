@@ -1,19 +1,6 @@
-<ion-header translucent>
-  <ion-toolbar class="ion-no-border">
-    <ion-buttons slot="start">
-      <ion-button routerLink="/home">
-        <ion-icon slot="icon-only" size="large" name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Cadastro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
 
-  <div id="logo_div">
-    <img src="../../../assets/icon/logo.png" height="130" alt="App Carona">
-  </div>
+  <app-header title="Cadastro"></app-header>
 
   <form [formGroup]="registerForm" (submit)="createUser()">
     <ion-item>
@@ -56,3 +43,11 @@
   </form>
 
 </ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <ion-button size="small" [routerLink]="['/login']" fill="clear" color="primary">Voltar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

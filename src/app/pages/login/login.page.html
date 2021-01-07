@@ -1,10 +1,6 @@
 <ion-content class="ion-padding">
-  <div id="logo_div">
-    <ion-text color="medium">
-      <img src="../../../assets/icon/logo.png" height="130">
-      <h3>App Carona</h3>
-    </ion-text>
-  </div>
+
+  <app-header title="Login"></app-header>
 
   <form [formGroup]="loginForm" (submit)="login()">
     <ion-item>
@@ -25,6 +21,17 @@
   </form>
 
 </ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col>
+      <ion-button size="small" [routerLink]="['/forgot']" fill="clear" color="primary">Esqueci minha senha</ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button size="small" [routerLink]="['/register']" fill="clear" color="primary">Criar conta</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
 
 
 
