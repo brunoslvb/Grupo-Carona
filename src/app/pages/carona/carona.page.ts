@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CaronaService } from 'src/app/services/carona.service';
 
 @Component({
   selector: 'app-carona',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaronaPage implements OnInit {
 
-  constructor() { }
+  listofcards;
+  constructor(
+  private card: CaronaService
+    ) { }
 
   ngOnInit() {
+  this.card.listMotoristas('card').subscribe(x => this.listofcards = x);
   }
+
 
 }
