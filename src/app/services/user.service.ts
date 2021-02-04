@@ -45,7 +45,6 @@ export class UserService {
 
   listMotoristas(){
     return this.firestore.collection('users', ref => ref.where('available', '==', true)).valueChanges();
-    // return this.firestore.collection('users').ref.where('available', '==', true).get();
   }
   
   forgotPassword(id) {
