@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'forgot',
     loadChildren: () => import('./pages/forgot/forgot.module').then( m => m.ForgotPageModule)
+  },  {
+    path: 'carona',
+    loadChildren: () => import('./pages/carona/carona.module').then( m => m.CaronaPageModule)
   },
+  {
+    path: 'motorista',
+    loadChildren: () => import('./pages/motorista/motorista.module').then( m => m.MotoristaPageModule)
+  },
+
 
 ];
 

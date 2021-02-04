@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Bem vindo(a) ao App Carona
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()">
@@ -12,14 +12,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <app-header title="Início"></app-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div id="btn_home">
+      <ion-button [routerLink]="['/motorista']" expand="block" size="large" type="submit" color="warning"> 
+        <ion-icon name="car"></ion-icon> Motorista <ion-icon name="car"></ion-icon>
+      </ion-button>
+      <br>
+      <ion-button [routerLink]="['/carona']" expand="block" size="large" type="submit" color="tertiary">  
+        <ion-icon name="walk"></ion-icon> Carona <ion-icon name="walk"></ion-icon>
+      </ion-button>
+    </div>
   </div>
 </ion-content>
+
+<ion-footer style="background:black;">
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="logout()" expand="block" fill="clear" shape="round" color="danger">
+        Sair  
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

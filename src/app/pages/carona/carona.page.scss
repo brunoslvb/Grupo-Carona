@@ -1,0 +1,42 @@
+ion-card {
+  border-radius: 15px;
+  --background: #1f1f1f;
+
+  margin: 20px;
+
+  .card-container {
+
+    margin: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .info {
+
+      font-size: 14pt;
+
+      .address {
+        font-size: 12pt;
+        margin-top: -10px;
+      }
+
+    }
+
+    .buttons {
+      display: flex;
+      flex-flow: column-reverse;
+      align-items: center;
+      justify-content: space-around;
+
+      ion-icon {
+        font-size: 20px;
+      }
+
+    }
+  }
+
+  hr {
+    height: 1px;
+    margin-top: 20px;
+    background-color: #dadada;
+  }
+}
