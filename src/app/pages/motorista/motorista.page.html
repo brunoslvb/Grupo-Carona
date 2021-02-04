@@ -9,22 +9,61 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
   <div class="container">
 
     <div class="center">
-      <ion-icon name="person-circle-outline"></ion-icon>
+      <ion-icon name="person-circle-outline" style="font-size: 100px;"></ion-icon>
     </div>
-    
-    <p><strong>Nome:</strong> Bruno da Silva Barros</p>
-    <p><strong>Endereço:</strong> Avenida Salgado Filho, 3119</p>
 
     <ion-item>
       <ion-label>Disponível</ion-label>
       <ion-toggle slot="start" name="grape" color="primary" checked></ion-toggle>
     </ion-item>
 
+    <form [formGroup]="motoristaForm" (submit)="atualizarDadosMotorista()">
+      <ion-item>
+        <ion-icon slot="start" name="clipboard-outline"></ion-icon>
+        <ion-input type="text" formControlName="prontuario" placeholder="Prontuário" autofocus="true" ></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-input type="text" formControlName="name" placeholder="Nome" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        <ion-input type="number" formControlName="phone" placeholder="Número de telefone" ></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-input type="date" formControlName="birthday" placeholder="Data de Nascimento" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-input type="text" formControlName="address" placeholder="Endereço" ></ion-input>
+      </ion-item>
+      
+      <br/><br/>
+  
+      <ion-button type="submit" expand="block" shape="round" size="default">
+        Atualizar
+      </ion-button>
+    </form>
   </div>
 
 </ion-content>
+
+<ion-footer style="background:black;">
+  <ion-row>
+    <ion-col>
+      <ion-button [routerLink]="['/home']"  expand="block" fill="clear" shape="round" color="medium">
+        Voltar  
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
