@@ -11,21 +11,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding" [fullscreen]="true">
 
   <app-header title="Início"></app-header>
 
-  <div id="container">
-    <div id="btn_home">
-      <ion-button [routerLink]="['/motorista']" expand="block" size="large" type="submit" color="warning"> 
-        <ion-icon name="information-circle"></ion-icon> Atualizar Informações <ion-icon name="information-circle"></ion-icon>
-      </ion-button>
-      <br>
-      <ion-button [routerLink]="['/carona']" expand="block" size="large" type="submit" color="tertiary">  
-        <ion-icon name="walk"></ion-icon> Pegar uma Carona <ion-icon name="walk"></ion-icon>
-      </ion-button>
-    </div>
+  <div id="btnMenu">
+    <ion-button color="primary" [routerLink]="['/motorista']" expand="block">Motorista</ion-button><br>
+    <ion-button color="warning" [routerLink]="['/carona']"expand="block">Carona</ion-button><br>
   </div>
+
 </ion-content>
 
 <ion-footer style="background:black;">
