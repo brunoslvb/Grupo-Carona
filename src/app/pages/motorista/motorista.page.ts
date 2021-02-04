@@ -13,15 +13,21 @@ import { Observable } from 'rxjs/internal/Observable';
 export class MotoristaPage implements OnInit {
   
   motoristaForm: FormGroup;
+  
   loading: any;
-  userData: Object = {
+  
+  userData: any = {
     prontuario:'',
     name:'',
     email:'',
     phone:'',
     birthday:'',
-    location:'',
-    available:''
+    location: {
+      address: '',
+      latitude: 0,
+      longitude: 0
+    },
+    available:false
   };
 
   constructor(
@@ -36,9 +42,8 @@ export class MotoristaPage implements OnInit {
   ngOnInit() {
 
     this.auth.onAuthStateChanged(user => {
-      this.getUserData(user.email).subscribe((data)=>{
-        this.userData = data[0];
-        console.log(this.userData);
+      this.userService.getById(user.email).subscribe((data)=>{
+        this.userData = data.payload.data();
       });
     });
 
@@ -51,16 +56,33 @@ export class MotoristaPage implements OnInit {
     });
   }
 
+  async userIsAvailable(event){
+    this.userData.available = event.detail.checked;
+  }
 
   async atualizarDadosMotorista(){
-    let userEmail = (<HTMLInputElement>document.getElementById('domain')).value;
-    return this.firestore.doc('users' + '/' + userEmail).update(this.userData);
+
+    this.loading = await this.loadingController.create({ spinner: 'crescent' });
+
+    await this.loading.present();
+
+    const data = this.motoristaForm.value;    
+
+    data.available = this.userData.available;
+
+    data.location = {
+      address: this.motoristaForm.value.address,
+      latitude: this.userData.location.latitude === undefined ? 0 : this.userData.location.latitude,
+      longitude: this.userData.location.longitude === undefined ? 0 : this.userData.location.longitude
+    }    
+
+    delete data.address;
+
+    data.email = (<HTMLInputElement>document.getElementById('domain')).value;
+    
+    await this.userService.updateUserInFirestore(data);
+
+    await this.loading.dismiss();
   }
-
-  getUserData ( email: string ): Observable<any> {
-    return this.firestore.collection<any> ( "users" , ref => ref.where ( 'email' , '==' , email ) ).valueChanges ();
-  }
-
-
 
 }

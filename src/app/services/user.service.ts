@@ -27,12 +27,20 @@ export class UserService {
     return this.auth.signInWithEmailAndPassword(user.email, user.password);
   }
 
+  getById(id){
+    return this.firestore.collection('users').doc(id).snapshotChanges();
+  }
+
   createUser(user) {
     return this.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
 
   createUserInFirestore(user){
     return this.firestore.collection('users').doc(user.email).set(user);
+  }
+
+  updateUserInFirestore(user){
+    return this.firestore.collection('users').doc(user.email).update(user);
   }
   
   forgotPassword(id) {
