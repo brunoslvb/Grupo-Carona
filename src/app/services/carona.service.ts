@@ -13,7 +13,7 @@ export class CaronaService {
   ) { }
 
   listMotoristas(card){
-  this.collection = this.db.collection('users', ref=> ref.where('available', '==', true));
-  return this.collection.valueChanges();
+    this.collection = this.db.collection('users', ref=> ref.where('available', '==', true));
+    return this.collection.valueChanges();
   }
 }

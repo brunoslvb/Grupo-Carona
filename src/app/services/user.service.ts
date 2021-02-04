@@ -42,6 +42,11 @@ export class UserService {
   updateUserInFirestore(user){
     return this.firestore.collection('users').doc(user.email).update(user);
   }
+
+  listMotoristas(){
+    return this.firestore.collection('users', ref => ref.where('available', '==', true)).valueChanges();
+    // return this.firestore.collection('users').ref.where('available', '==', true).get();
+  }
   
   forgotPassword(id) {
     return this.auth.sendPasswordResetEmail(id);

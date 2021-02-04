@@ -10,16 +10,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngfor="let card of listofcards">
-    <div class="card-container">
-      <div class="info">
-        <p class="name">{{card.nome}}</p>
-        <p class="address"></p>
+  <div *ngFor="let driver of drivers">
+    <ion-card>
+      <div class="card-container">
+        <div class="info">
+          <p class="name">{{driver.name}}</p>
+          <p class="address">{{driver.location.address}}</p>
+        </div>
+        <div class="buttons">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+          <ion-icon name="location-sharp"></ion-icon>
+        </div>
       </div>
-      <div class="buttons">
-        <ion-icon name="logo-whatsapp"></ion-icon>
-        <ion-icon name="location-sharp"></ion-icon>
-      </div>
-    </div>
-  </ion-card>
+    </ion-card>
+  </div>
 </ion-content>
