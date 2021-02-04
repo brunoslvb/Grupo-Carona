@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Motorista</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button [routerLink]="['/carona']">
+        <ion-icon name="walk-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+
+    <div class="center">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </div>
+    
+    <p><strong>Nome:</strong> Bruno da Silva Barros</p>
+    <p><strong>Endereço:</strong> Avenida Salgado Filho, 3119</p>
+
+    <ion-item>
+      <ion-label>Disponível</ion-label>
+      <ion-toggle slot="start" name="grape" color="primary" checked></ion-toggle>
+    </ion-item>
+
+  </div>
+
+</ion-content>
