@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth'
 import { LoadingController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 @Component({
@@ -16,10 +18,15 @@ export class MotoristaPage implements OnInit {
     private builder: FormBuilder,
     private nav: NavController,
     private userService: UserService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private firestore: AngularFirestore,
+    private afAuth: AngularFireAuth
+
   ) { }
 
   ngOnInit() {
+
+    this.getUsers();
 
 
     this.motoristaForm = this.builder.group({
@@ -36,9 +43,10 @@ export class MotoristaPage implements OnInit {
 
   }
 
-  
+  getUsers(){
+    return this.firestore.collection('users').snapshotChanges();
+  }
 
 
-  
 
 }
