@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { LoadingController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
+import { Observable } from 'rxjs/internal/Observable';
 @Component({
   selector: 'app-motorista',
   templateUrl: './motorista.page.html',
@@ -13,38 +14,51 @@ export class MotoristaPage implements OnInit {
   
   motoristaForm: FormGroup;
   loading: any;
+  userData: Object = {
+    prontuario:'',
+    name:'',
+    email:'',
+    phone:'',
+    birthday:'',
+    location:'',
+    available:''
+  };
 
   constructor(
     private builder: FormBuilder,
     private nav: NavController,
     private userService: UserService,
     private loadingController: LoadingController,
-    private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth
-
+    public firestore: AngularFirestore,
+    private auth: AngularFireAuth
   ) { }
 
   ngOnInit() {
 
-    this.getUsers();
-
+    this.auth.onAuthStateChanged(user => {
+      this.getUserData(user.email).subscribe((data)=>{
+        this.userData = data[0];
+        console.log(this.userData);
+      });
+    });
 
     this.motoristaForm = this.builder.group({
       prontuario: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
       name: ['', Validators.required],
       phone: ['', Validators.required],
       birthday: ['', Validators.required],
-      password: ['', Validators.required],
       address: ['', Validators.required]
     });
   }
 
-  async atualizarDadosMotorista(){
 
+  async atualizarDadosMotorista(){
+    let userEmail = (<HTMLInputElement>document.getElementById('domain')).value;
+    return this.firestore.doc('users' + '/' + userEmail).update(this.userData);
   }
 
-  getUsers(){
-    return this.firestore.collection('users').snapshotChanges();
+  getUserData ( email: string ): Observable<any> {
+    return this.firestore.collection<any> ( "users" , ref => ref.where ( 'email' , '==' , email ) ).valueChanges ();
   }
 
 

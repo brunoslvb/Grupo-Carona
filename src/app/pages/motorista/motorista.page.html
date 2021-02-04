@@ -17,37 +17,44 @@
       <ion-icon name="person-circle-outline" style="font-size: 100px;"></ion-icon>
     </div>
 
-    <ion-item>
-      <ion-label>Disponível</ion-label>
-      <ion-toggle slot="start" name="grape" color="primary" checked></ion-toggle>
-    </ion-item>
+    
 
     <form [formGroup]="motoristaForm" (submit)="atualizarDadosMotorista()">
       <ion-item>
+        <ion-label>Disponível</ion-label>
+        <ion-toggle slot="start" name="grape" color="primary" checked="{{userData.available}}"></ion-toggle>
+      </ion-item>
+      
+      <ion-item>
         <ion-icon slot="start" name="clipboard-outline"></ion-icon>
-        <ion-input type="text" formControlName="prontuario" placeholder="Prontuário" autofocus="true" ></ion-input>
+        <ion-input type="text" formControlName="prontuario" placeholder="Prontuário" value="{{userData.prontuario}}" autofocus="true" ></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-icon slot="start" name="person-outline"></ion-icon>
-        <ion-input type="text" formControlName="name" placeholder="Nome" ></ion-input>
+        <ion-input type="text" formControlName="name" placeholder="Nome" value="{{userData.name}}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon slot="start" name="call-outline"></ion-icon>
-        <ion-input type="number" formControlName="phone" placeholder="Número de telefone" ></ion-input>
+        <ion-input type="number" formControlName="phone" placeholder="Número de telefone" value="{{userData.phone}}"></ion-input>
       </ion-item>
   
       <ion-item>
         <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-input type="date" formControlName="birthday" placeholder="Data de Nascimento" ></ion-input>
+        <ion-input type="date" formControlName="birthday" placeholder="Data de Nascimento" value="{{userData.birthday}}"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-input type="text" formControlName="address" placeholder="Endereço" ></ion-input>
+        <ion-input type="text" formControlName="address" placeholder="Endereço" value="{{userData.location.address}}"></ion-input>
       </ion-item>
-      
+
+      <ion-item>
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-input id="domain" type="text" value="{{userData.email}}" readonly></ion-input>
+      </ion-item>
+
       <br/><br/>
   
       <ion-button type="submit" expand="block" shape="round" size="default">
