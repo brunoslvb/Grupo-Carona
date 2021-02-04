@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoadingController, NavController } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
 import Firebase from 'firebase/app';
 import { Observable } from 'rxjs';
 
@@ -16,7 +17,8 @@ export class UserService {
   constructor(
     private auth: AngularFireAuth,
     private loadingController: LoadingController,
-    private nav: NavController
+    private nav: NavController,
+    private firestore: AngularFirestore
   ) {
     this.isLoggedIn = this.auth.authState;
   }
@@ -27,6 +29,10 @@ export class UserService {
 
   createUser(user) {
     return this.auth.createUserWithEmailAndPassword(user.email, user.password);
+  }
+
+  createUserInFirestore(user){
+    return this.firestore.collection('users').doc(user.email).set(user);
   }
   
   forgotPassword(id) {
