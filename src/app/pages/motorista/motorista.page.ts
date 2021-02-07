@@ -4,7 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth'
 import { LoadingController, NavController } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
-import { Observable } from 'rxjs/internal/Observable';
+
+declare var google;
+
 @Component({
   selector: 'app-motorista',
   templateUrl: './motorista.page.html',
@@ -12,10 +14,17 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class MotoristaPage implements OnInit {
   
+  private googleMapsPlaces = new google.maps.places.AutocompleteService();
+  private googleMapsGeocoder = new google.maps.Geocoder();
+
   motoristaForm: FormGroup;
   
   loading: any;
   
+  addresses: Array<{
+    description: string;
+  }> = [];
+
   userData: any = {
     prontuario:'',
     name:'',
@@ -66,23 +75,50 @@ export class MotoristaPage implements OnInit {
 
     await this.loading.present();
 
-    const data = this.motoristaForm.value;    
+    const data = {
+      email: this.userData.email,
+      available: this.userData.available,
+      location: {
+        address: this.motoristaForm.value.address,
+        latitude: this.userData.location.latitude === undefined ? 0 : this.userData.location.latitude,
+        longitude: this.userData.location.longitude === undefined ? 0 : this.userData.location.longitude
+      }
+    }
 
-    data.available = this.userData.available;
-
-    data.location = {
-      address: this.motoristaForm.value.address,
-      latitude: this.userData.location.latitude === undefined ? 0 : this.userData.location.latitude,
-      longitude: this.userData.location.longitude === undefined ? 0 : this.userData.location.longitude
-    }    
-
-    delete data.address;
-
-    data.email = (<HTMLInputElement>document.getElementById('domain')).value;
+    await this.userService.updateUserInFirestore({...this.motoristaForm.value, ...data});
     
-    await this.userService.updateUserInFirestore(data);
-
     await this.loading.dismiss();
+  }
+
+  async searchAddress(){
+    this.googleMapsPlaces.getPlacePredictions({ input: this.motoristaForm.value.address }, predictions => {
+      this.addresses = predictions;
+    });
+  }
+
+  clearInput() {
+    if(!this.motoristaForm.value.address.trim().length) {
+      this.addresses = [];
+      return;
+    }; 
+  }
+
+  async searchSelected(address: string) {
+    
+    (<HTMLInputElement>document.getElementById('address')).value = address;
+
+    this.motoristaForm.value.address = address;
+
+    this.addresses = [];
+
+    await this.googleMapsGeocoder.geocode({
+      address
+    }, (data) => {
+      
+      this.userData.location.latitude = data[0].geometry.location.lat();
+      this.userData.location.longitude = data[0].geometry.location.lng();
+    
+    });
   }
 
 }

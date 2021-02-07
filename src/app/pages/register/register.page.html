@@ -26,7 +26,7 @@
 
     <ion-item>
       <ion-icon slot="start" name="location-outline"></ion-icon>
-      <ion-input type="text" formControlName="address" id="address" placeholder="Endereço" (ionChange)="searchAddress()"></ion-input>
+      <ion-input type="text" formControlName="address" id="address" placeholder="Endereço" (ionInput)="searchAddress()" (ionChange)="clearInput()"></ion-input>
     </ion-item>
 
     <div class="list">

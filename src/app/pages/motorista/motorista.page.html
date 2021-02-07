@@ -46,9 +46,15 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon slot="start" name="calendar-outline"></ion-icon>
-        <ion-input type="text" formControlName="address" placeholder="Endereço" value="{{userData.location.address}}"></ion-input>
+        <ion-icon slot="start" name="location-outline"></ion-icon>
+        <ion-input type="text" formControlName="address" id="address" placeholder="Endereço" value="{{userData.location.address}}" (ionInput)="searchAddress()" (ionChange)="clearInput()"></ion-input>
       </ion-item>
+  
+      <div class="list">
+        <ion-item button class="item" *ngFor="let address of addresses" (click)="searchSelected(address.description)">
+          {{address.description}}
+        </ion-item>
+      </div>
 
       <ion-item>
         <ion-icon slot="start" name="calendar-outline"></ion-icon>

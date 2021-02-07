@@ -66,7 +66,8 @@ export class RegisterPage implements OnInit {
           address: this.registerForm.value.address,
           latitude: this.coords[0],
           longitude: this.coords[1]
-        }
+        },
+        available: false
       };
       
       const credentials = await this.userService.createUser(this.registerForm.value);
@@ -85,9 +86,8 @@ export class RegisterPage implements OnInit {
 
   }
 
-  async searchAddress(){
-    
-    if(!this.registerForm.value.address.trim().length) {
+  async searchAddress(){    
+    if(!this.registerForm.value.address.trim().length) {      
       this.addresses = [];
       return;
     }; 
@@ -95,6 +95,13 @@ export class RegisterPage implements OnInit {
     this.googleMapsPlaces.getPlacePredictions({ input: this.registerForm.value.address }, predictions => {
       this.addresses = predictions;
     });
+  }
+
+  clearInput() {
+    if(!this.registerForm.value.address.trim().length) {
+      this.addresses = [];
+      return;
+    }; 
   }
 
   async searchSelected(address: string) {
@@ -113,7 +120,5 @@ export class RegisterPage implements OnInit {
     
     });
   }
-
-
 
 }
